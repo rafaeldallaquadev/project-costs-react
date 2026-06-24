@@ -89,6 +89,11 @@ function Project() {
     })
       .then((resp) => resp.json())
       .then((data) => {
+        setProject(data);
+        setServices(data.services);
+        setShowServiceForm(false);
+        setMessage("Serviço adicionado com sucesso!");
+        setType("success");
         setShowServiceForm(false);
       })
       .catch((err) => console.log(err));
@@ -100,7 +105,7 @@ function Project() {
       (service) => service.id !== id,
     );
 
-    const projectUpdated = project;
+    const projectUpdated = { ...project };
 
     projectUpdated.services = servicesUpdate;
 
@@ -113,8 +118,8 @@ function Project() {
       },
       body: JSON.stringify(projectUpdated),
     })
-      .then((resp) => resp.json)
-      .then((data) => {
+      .then((resp) => resp.json())
+      .then(() => {
         setProject(projectUpdated);
         setServices(servicesUpdate);
         setMessage("Serviço removido com sucesso!");

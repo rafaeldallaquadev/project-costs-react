@@ -8,8 +8,13 @@ function ServiceForm({ handleSubmit, btnText, projectData }) {
 
   function submit(e) {
     e.preventDefault();
-    projectData.services.push(service);
-    handleSubmit(projectData);
+
+    const updatedProject = {
+      ...projectData,
+      services: [...projectData.services, service],
+    };
+
+    handleSubmit(updatedProject);
   }
 
   function handleChange(e) {
